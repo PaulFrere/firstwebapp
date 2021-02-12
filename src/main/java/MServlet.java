@@ -10,10 +10,8 @@ public class MServlet implements Servlet {
 
     private transient ServletConfig config;
 
-    // Метод вызывается контейнером после того как был создан класс сервлета
     @Override
     public void init(ServletConfig config) throws ServletException {
-        // Сохраняем полученную от сервера конфигурацию
         this.config = config;
     }
 
@@ -22,12 +20,10 @@ public class MServlet implements Servlet {
         return config;
     }
 
-    // Метод вызывается для каждого нового HTTP запроса к данному сервлету
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         log.info("New request");
 
-        // получаем объект типа BufferedWriter и пишем в него ответ на пришедший запрос
         res.getWriter().println("<h1>Servlet content</h1>");
     }
 
@@ -36,7 +32,6 @@ public class MServlet implements Servlet {
         return "BasicServlet";
     }
 
-    // При завершении работы веб приложения, контейнер вызывает этот метод для всех сервлетов из этого приложения
     @Override
     public void destroy() {
         log.info("Servlet {} destroyed", getServletInfo());
